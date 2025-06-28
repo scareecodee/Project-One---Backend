@@ -41,6 +41,7 @@ def download_and_merge_video(req: DownloadRequest):
     'format': f'bestvideo[height<={quality_num}]+bestaudio/best[height<={quality_num}]',
     'outtmpl': f'temp/%(title)s_{quality_num}p.%(ext)s',
     'merge_output_format': 'mp4',
+     'cookiefile': '/etc/secrets/cookies.txt',
     'quiet': True,
 }
 
@@ -84,6 +85,7 @@ def get_available_qualities(req: VideoInfoRequest):
         ydl_opts = {
             'quiet': True,
             'skip_download': True,
+             'cookiefile': '/etc/secrets/cookies.txt'
         }
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -126,6 +128,7 @@ def download_best_audio(req: AudioRequest):
                 'preferredcodec': 'mp3',
                 'preferredquality': '192',
             }],
+             'cookiefile': '/etc/secrets/cookies.txt',
             'quiet': True
         }
 
@@ -188,5 +191,4 @@ The Zebyte Team'''
         return {"status": "success", "otp": otp}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error sending email: {str(e)}")
-
 
