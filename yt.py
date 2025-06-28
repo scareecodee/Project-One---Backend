@@ -192,3 +192,10 @@ The Zebyte Team'''
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error sending email: {str(e)}")
 
+@app.get("/debug/check-cookies")
+def check_cookies_file():
+    path = "/etc/secrets/cookies.txt"
+    return {
+        "exists": os.path.exists(path),
+        "size": os.path.getsize(path) if os.path.exists(path) else 0
+    }
