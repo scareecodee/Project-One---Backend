@@ -80,6 +80,11 @@ class VideoInfoResponse(BaseModel):
     title: str = ""
     error: str = None
 
+@app.get("/")
+def root():
+    return {"message": "Zebyte Backend is running successfully 🚀"}
+
+
 
 @app.post("/video/get-qualities", response_model=VideoInfoResponse)
 def get_available_qualities(req: VideoInfoRequest):
