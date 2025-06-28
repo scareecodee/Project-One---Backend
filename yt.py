@@ -174,8 +174,8 @@ def send_otp(request: EmailRequest):
     otp = random.randint(100000, 999999)
 
     # ✅ Email details
-    sender_email = "godofgenjutsu890@gmail.com"
-    app_password = "zxhf dhds yvgm vnou"
+    sender_email = os.getenv("SENDER_EMAIL")
+    app_password = os.getenv("EMAIL_PASS")
     subject = "Your Verification OTP - Zebyte App"
     body = f'''Thank you for using Zebyte!
 To complete your verification, please use the one-time password (OTP) below:
