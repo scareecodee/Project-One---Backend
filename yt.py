@@ -1,20 +1,16 @@
-# main.py
 import os
 import yt_dlp
-from fastapi import FastAPI, BackgroundTasks
+import smtplib
+import random
+from fastapi import FastAPI, BackgroundTasks, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
+from email.mime.text import MIMEText
+from typing import List
 
 app = FastAPI()
 
-
-@app.get("/")
-def root():
-    return {"message": "Zebyte Backend is running successfully 🚀"}
-
-
-# CORS setup for Android app communication
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -22,6 +18,15 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+
+@app.get("/")
+def root():
+    return {"message": "Zebyte Backend is running successfully 🚀"}
+
+
+
 
 class DownloadRequest(BaseModel):
     video_url: str
@@ -56,24 +61,6 @@ def get_downloaded_file(filename: str, background_tasks: BackgroundTasks):
         return FileResponse(filepath, media_type="video/mp4", filename=filename)
     return {"success": False, "error": "File not found"}
 
-
-
-# main.py
-import yt_dlp
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-from typing import List
-
-
-# CORS config (allow all origins for development)
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Update with your frontend domain in production
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 
 
@@ -161,15 +148,6 @@ def get_audio_file(filename: str, background_tasks: BackgroundTasks):
 
 
 
-
-
-
-
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-import smtplib
-from email.mime.text import MIMEText
-import random
 
 
 
