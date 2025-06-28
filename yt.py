@@ -43,6 +43,9 @@ def download_and_merge_video(req: DownloadRequest):
     'merge_output_format': 'mp4',
      'cookiefile': '/etc/secrets/cookies.txt',
     'quiet': True,
+      'http_headers': {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
+    },
 }
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -85,7 +88,10 @@ def get_available_qualities(req: VideoInfoRequest):
         ydl_opts = {
             'quiet': True,
             'skip_download': True,
-             'cookiefile': '/etc/secrets/cookies.txt'
+             'cookiefile': '/etc/secrets/cookies.txt',
+               'http_headers': {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
+    },
         }
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -129,7 +135,10 @@ def download_best_audio(req: AudioRequest):
                 'preferredquality': '192',
             }],
              'cookiefile': '/etc/secrets/cookies.txt',
-            'quiet': True
+            'quiet': True,
+              'http_headers': {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
+    },
         }
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
