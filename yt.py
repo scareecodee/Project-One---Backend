@@ -8,6 +8,12 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
+
+@app.get("/")
+def root():
+    return {"message": "Zebyte Backend is running successfully 🚀"}
+
+
 # CORS setup for Android app communication
 app.add_middleware(
     CORSMiddleware,
@@ -80,9 +86,7 @@ class VideoInfoResponse(BaseModel):
     title: str = ""
     error: str = None
 
-@app.get("/")
-def root():
-    return {"message": "Zebyte Backend is running successfully 🚀"}
+
 
 
 
