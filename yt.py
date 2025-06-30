@@ -184,7 +184,7 @@ If you did not request this code, you can safely ignore this email.
 Thank you for choosing Zebyte!
 
 Best regards,
-The Zebyte Team'''
+Project One'''
 
     msg = MIMEText(body)
     msg["Subject"] = subject
